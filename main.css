@@ -1,0 +1,56 @@
+.search-results {
+        display: flex;
+        flex-direction: column;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .radio-item.selected {
+            background: #e94560;
+        }
+
+        .radio-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+            margin-right: 12px;
+            background: #333;
+            flex-shrink: 0;
+        }
+
+        .radio-info {
+            overflow: hidden;
+        }
+
+        .radio-name {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .radio-tags {
+            font-size: 0.8em;
+            color: #999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }

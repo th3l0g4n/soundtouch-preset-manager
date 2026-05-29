@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <script defer src="/client.js"></script>
+    <title>SoundTouch Preset Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@4.0.0-beta4/dist/htmx.min.js" integrity="sha384-aWZK1NtOs/aWb/+YZdTM8q2JkWEshlMc9mgZ189numT9bwFhyAyYEoO4nO/2dTXt" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>SoundTouch Preset Manager</h1>
+    <form hx-boost hx-post="/api/savePreset" hx-trigger="submit" hx-target="#response" hx-swap="innerHTML"> 
+       <fieldset>
+           <legend>Devices</legend>
+           <div hx-get="/api/discover" hx-trigger="load" hx-swap="outerHTML">Loading...</div> 
+       </fieldset>
+       <fieldset>
+            <legend>Station Info</legend>
+            <input type="search" name="station" placeholder="Search for a station..." hx-get="/api/stations" hx-target="#station-response" hx-trigger="keyup changed delay:500ms"/>
+            <div id="station-response" class="search-results"></div>
+            <input type="hidden" name="station-uuid" id="station-uuid" value="" />
+       </fieldset>
+       <fieldset>
+            <legend>Preset Button</legend>
+            <input type="radio" name="preset-button" value="1" checked />
+            <label for="preset-button-1">Button 1</label>
+            <input type="radio" name="preset-button" value="2" />
+            <label for="preset-button-2">Button 2</label>
+            <input type="radio" name="preset-button" value="3" />
+            <label for="preset-button-3">Button 3</label>
+            <input type="radio" name="preset-button" value="4" />
+            <label for="preset-button-4">Button 4</label>
+            <input type="radio" name="preset-button" value="5" />
+            <label for="preset-button-5">Button 5</label>
+            <input type="radio" name="preset-button" value="6" />
+            <label for="preset-button-6">Button 6</label>
+       </fieldset>
+        <button type="submit">Save Preset</button>
+    </form>
+    <output id="response"></output>
+</body>
+</html>
