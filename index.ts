@@ -63,19 +63,20 @@ serve({
             }
 
             const presetTpl = (presetButton, station) => `<preset id="${presetButton}">
-                <ContentItem source="LOCAL_INTERNET_RADIO" type="stationurl" location="https://all.api.radio-browser.info/soundtouch/stations/byuuid/${station.stationuuid}">
+                <ContentItem source="LOCAL_INTERNET_RADIO" type="stationurl" location="http://all.api.radio-browser.info/soundtouch/stations/byuuid/${station.stationuuid}">
                     <itemName>${station.name}</itemName>
                     <containerArt>${station.favicon}</containerArt>
                 </ContentItem>
             </preset>`;
 
             const storePromises = devices.map((ip: string) => storePreset(ip, presetTpl(presetButton, station)));
-            await Promise.all(storePromises).catch((error) => {
+            return await Promise.all(storePromises).then((results) => {
+                // console.log('Preset stored on devices:', results);
+                return new Response('Preset saved successfully');
+            }).catch((error) => {
                 console.error('Error storing preset:', error);
                 return new Response('Error storing preset', { status: 500 });
             });
-
-            return new Response('Preset saved successfully');
         }
     }
 })
